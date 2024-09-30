@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class User {
     private String name;
@@ -51,19 +50,23 @@ public class User {
     }
 
     public void checkDueDates() {
-        Set<Map.Entry<String, LocalDate>> entries = borrowedBooksDueDates.entrySet();
-        for (Map.Entry<String, LocalDate> entry : entries) {
-            System.out.println(name + ", Due Date: " + entry.getValue());
-        }
-    }
-
-    public void checkOverdueBooks() {
-        LocalDate today = LocalDate.now();
-        for (Map.Entry<String, LocalDate> entry : borrowedBooksDueDates.entrySet()) {
-            long daysOverdue = today.until(entry.getValue()).getDays();
-            if (daysOverdue < 0) {
-                System.out.println("Book: " + entry.getKey() + ", Overdue by " + Math.abs(daysOverdue) + " days");
+        if (borrowedBooks.isEmpty()) {
+            System.out.println(name + " has no books to check for due dates.");
+        } else {
+            for (String book : borrowedBooks) {
+                LocalDate dueDate = borrowedBooksDueDates.get(book);
+                System.out.println(name + " " + "Book: " + book + ", Due Date: " + dueDate  );
             }
         }
     }
+
+//    public void checkOverdueBooks() {
+//         LocalDate today = LocalDate.now();
+//         for (Map.Entry<String, LocalDate> entry : borrowedBooksDueDates.entrySet()) {
+//             long daysOverdue = today.until(entry.getValue()).getDays();
+//             if (daysOverdue < 0) {
+//                 System.out.println("Book: " + entry.getKey() + ", Overdue by " + Math.abs(daysOverdue) + " days");
+//             }
+//         }
+//     }
 }
