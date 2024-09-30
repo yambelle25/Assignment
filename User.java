@@ -51,7 +51,7 @@ public class User {
 
     public void checkDueDates() {
         if (borrowedBooks.isEmpty()) {
-            System.out.println(name + " has no books to check for due dates.");
+            System.out.println(name + ": No books to check for due dates.");
         } else {
             for (String book : borrowedBooks) {
                 LocalDate dueDate = borrowedBooksDueDates.get(book);
